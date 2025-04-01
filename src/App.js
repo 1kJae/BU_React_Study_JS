@@ -25,16 +25,66 @@ const choice = {
 };
 
 function App() {
-  let [userSelect, setUserSelect] = useState(null)
+  const [userSelect, setUserSelect] = useState(null);
+  const [computerSelect, setComputerSelect] = useState(null);
+  const [userResult, setUserResult] = useState("");
+  const [computerResult, setComputerResult] = useState("");
 
   const play = (userChoice) => {
-    setUserSelect(choice[userChoice])
+    let computerChoice = randomChoice();
+
+    setUserSelect(choice[userChoice]);
+    setComputerSelect(computerChoice);
+
+    let result = judgement(choice[userChoice], computerChoice);
+    setUserResult(result);
+    setComputerResult(getComputerResult(result));
   }
+
+  const judgement=(user, computer)=>{
+    // user == computer tie
+    // user == "rock", computer == "scissors" user 이긴 거지
+    // user == "rock" computer == "paper" user 진 거지
+    // user == "scissors" computer == "paper" user 이긴 거지
+    // user == "scissors" computer == "rock" user 진 거지
+    // user == "paper" computer == "rock" user 이긴 거지
+    // user == "paper" computer == "scissors" user 진 거지
+
+    // if(user.name == computer.name) {
+    //   return "tie"
+    // } else if (user.name == "Rock"){
+    //   return "win"
+    // } else {
+    //   return "lose"
+    // } => 삼항연산식으로 바꿔서 사용
+
+    if(user.name === computer.name) {
+      return "tie"
+    } else if (user.name === "Rock") 
+      return computer.name === "Scissors" ? "win" : "lose"
+    else if (user.name === "Scissors") 
+      return computer.name === "Paper" ? "win" : "lose"
+    else if (user.name === "Paper") return computer.name === "Rock" ? "win" : "lose";
+  };
+
+  const getComputerResult=(userResult)=>{
+    if (userResult === "win") return "lose";
+    if (userResult === "lose") return "win";
+    return "tie";
+  }
+
+  const randomChoice=()=>{
+    let itemArray = Object.keys(choice); // 객체에 키값만 뽑아서 Array로 만들어 주는 함수다.
+    let randomItem = Math.floor(Math.random() * itemArray.length); 
+    let final = itemArray[randomItem];
+    return choice[final];
+  }
+
   return (
     <div>
       <div className='main'>
-        <Box title="you" item={userSelect}/>
-        {/* <Box title="computer"/> */}
+        <Box title="you" item={userSelect} result={userResult}/>
+        <Box title="Computer" item={computerSelect} result={computerResult}/>
       </div>
       <div className='main'>
         <button onClick={() => play("scissors")}>가위</button>

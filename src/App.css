@@ -5,9 +5,22 @@
 
 .item-img {
   width: 400px;
+  height: 300px;
 }
 
 .main {
   display: flex;
   justify-content: center;
+}
+
+.win {
+  border: 5px solid green;
+}
+
+.lose {
+  border: 5px solid red;
+}
+
+.tie {
+  border: 5px solid black;
 }
