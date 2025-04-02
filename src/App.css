@@ -6,11 +6,15 @@
 .item-img {
   width: 400px;
   height: 300px;
+  display: block;
+  margin: auto;
 }
 
 .main {
   display: flex;
   justify-content: center;
+  gap: 5px; 
+  margin-top: 20px;
 }
 
 .win {
@@ -23,4 +27,49 @@
 
 .tie {
   border: 5px solid black;
+}
+
+.box.win .player-text {
+  display: flex;
+  justify-content: center;
+  color: green;
+}
+.box.lose .player-text {
+  display: flex;
+  justify-content: center;
+  color: red;
+}
+.box.tie .player-text {
+  display: flex;
+  justify-content: center;
+  color: black;
+}
+
+.box.win {
+  border: 5px solid green;
+}
+.box.lose {
+  border: 5px solid red;
+}
+.box.tie {
+  border: 5px solid black;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+button img {
+  transition: transform 0.2s;
+}
+button:hover img {
+  transform: scale(1.1);
+}
+
+.result {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 10px;
 }
